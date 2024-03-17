@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Login Form</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <section class="containern hidden">
+      <div class="login">
+        <h1>Login</h1>
+        <form id="loginForm">
+          <label for="username">Username:</label>
+          <input
+            type="text"
+            id="username"
+            name="username"
+            placeholder="Enter your username"
+            required
+          />
+
+          <label for="password">Password:</label>
+          <input
+            type="password"
+            id="password"
+            name="password"
+            placeholder="Enter your password"
+            required
+          />
+
+          <span class="error-message"></span>
+          <button type="submit">Login</button>
+        </form>
+      </div>
+    </section>
+    <section class="">
+      <div class="empInfor">
+        <h2>Quản lý sự vụ - Hoàng Dương Dũng</h2>
+        <div class="btnGroup">
+            <div class="actions groupBtn_update">
+                <button id="newBtn">New</button>
+                <button id="updateBtn">Update</button>
+                <button id="deleteBtn">Delete</button>
+              </div>
+              <div class="actions groupBtn_new hidden">
+                <button id="saveBtn">Save new data</button>
+                <button id="cancelBtn">Cancel new data</button>
+              </div>
+        </div>
+      </div>
+      <div class="detailWork">
+        <div class="item hidden">
+          <label for="">Id</label>
+          <input type="text" id="id" />
+        </div>
+        <div class="item" style="grid-column: span 3">
+          <label for="">Tiêu đề email</label>
+          <input type="text" id="email" />
+        </div>
+        <div class="item">
+          <label for="">Source</label>
+          <input
+            type="text"
+            id="source"
+            placeholder="KSTT, GSKK, ANCS, CSKH,..."
+          />
+        </div>
+        <div class="item">
+          <label for="">Mã SAP - tên cơ sở</label>
+          <input type="text" id="sap" placeholder="VD: 1530-WM Hà Đông" />
+        </div>
+        <div class="item">
+          <label for="">Ngày giao việc</label>
+          <input type="date" id="startDate" />
+        </div>
+        <div class="item">
+          <label for="">Nhân sự phụ trách</label>
+          <input type="text" id="pic" />
+        </div>
+        <div class="item">
+          <label for="">Nhân sự hỗ trợ</label>
+          <input type="text" id="support" />
+        </div>
+        <div class="item">
+          <label for="">Ngày hoàn thành</label>
+          <input type="date" id="endDate" />
+        </div>
+        <div class="item">
+          <label for="">Nhóm lỗi vi phạm</label>
+          <input type="text" id="group" />
+        </div>
+        <div class="item">
+          <label for="">Giá trị thất thoát</label>
+          <input type="text" id="lossValue" />
+        </div>
+        <div class="item">
+          <label for="">Giá trị thu hồi</label>
+          <input type="text" id="returnValue" />
+        </div>
+        <div class="item" style="grid-column: span 2; grid-row: span 2">
+          <label for="">Tóm tắt vấn đề</label>
+          <textarea name="" id="summarize" cols="30" rows="10"></textarea>
+        </div>
+        <div class="item" style="grid-column: span 2; grid-row: span 2">
+          <label for="">Note và cập nhật</label>
+          <textarea name="" id="note" cols="30" rows="10"></textarea>
+        </div>
+        <div class="item" style="grid-column: span 2; grid-row: span 2">
+          <label for="">Kết luận</label>
+          <textarea name="" id="conclusion" cols="30" rows="10"></textarea>
+        </div>
+      </div>
+      <div class="list">
+        <div class="list-title">
+          <h2>Danh sách sự vụ trong phạm vi 2 tháng</h2>
+          <div>
+            <button id="searchBtn">Search</button>
+            <button id="clearBtn">clearSearch</button>
+          </div>
+        </div>
+        <div class="search"></div>
+        <div class="dataTable"></div>
+      </div>
+      <div class="modal hidden">Loading...</div>
+      <script src="script.js"></script>
+      
+  </body>
+</html>
