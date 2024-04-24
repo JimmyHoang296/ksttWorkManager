@@ -1,3 +1,4 @@
+var user;
 var pics = ["A"];
 var emps = ["A", "B", "C", "D"];
 var data = [
@@ -237,7 +238,7 @@ async function handleLogin(event) {
       headers = data[1];
       data.splice(0, 2);
       emps = res.data.emps;
-
+      user = res.data.user;
       if (res.data.user.role === "hod") {
         pics = emps;
       } else {
@@ -343,8 +344,6 @@ function renderData() {
     handleSelectedRow(newRow);
     header.parentNode.insertBefore(newRow, header.nextSibling);
   });
-
-
 }
 function handleSelectedRow(selectedRow) {
   selectedRow.addEventListener("click", (e) => {
@@ -430,8 +429,8 @@ function handleNew() {
     if (header === "pic" && pics.length === 1) {
       el.value = 0;
     }
-    if(header ==="status"){
-      el.value = 0
+    if (header === "status") {
+      el.value = 0;
     }
   });
 
@@ -442,6 +441,21 @@ function handleNew() {
 
 // handle cancel
 function handleCancel() {
+  headers.forEach((header) => {
+    console.log(header);
+    var el = document.getElementById(header);
+    el.value = "";
+    if (header === "startDate") {
+      el.value = "";
+    }
+    if (header === "pic" && pics.length === 1) {
+      el.value = "#";
+    }
+    if (header === "status") {
+      el.value = 0;
+    }
+  });
+
   isNew = false;
   document.querySelector(".groupBtn_new").classList.add("hidden");
   document.querySelector(".groupBtn_update").classList.remove("hidden");
@@ -458,6 +472,8 @@ async function handleSave() {
       dataItem.push(convertToDateString(el.value));
     } else if (header === "suppport") {
       dataItem.push(emps[el.value]);
+    } else if (header === "hod") {
+      dataItem.push(user.hod);
     } else if (header === "status") {
       if (el.value === "0") {
         dataItem.push("Đang xử lý");
@@ -485,7 +501,7 @@ async function handleSave() {
     renderData();
 
     isNew = false;
-    isChange = false
+    isChange = false;
     document.querySelector(".groupBtn_new").classList.add("hidden");
     document.querySelector(".groupBtn_update").classList.remove("hidden");
   }
@@ -506,6 +522,8 @@ function handleUpdate() {
       dataItem.push(convertToDateString(el.value));
     } else if (header === "suppport") {
       dataItem.push(emps[el.value]);
+    } else if (header === "hod") {
+      dataItem.push(user.hod);
     } else if (header === "status") {
       if (el.value === "0") {
         dataItem.push("Đang xử lý");
