@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <section class="containern hidden">
+    <section class="container">
       <div class="login">
         <h1>Login</h1>
         <form id="loginForm">
@@ -34,19 +34,19 @@
         </form>
       </div>
     </section>
-    <section class="">
+    <section class="data hidden">
       <div class="empInfor">
         <h2>Quản lý sự vụ - Hoàng Dương Dũng</h2>
         <div class="btnGroup">
-            <div class="actions groupBtn_update">
-                <button id="newBtn">New</button>
-                <button id="updateBtn">Update</button>
-                <button id="deleteBtn">Delete</button>
-              </div>
-              <div class="actions groupBtn_new hidden">
-                <button id="saveBtn">Save new data</button>
-                <button id="cancelBtn">Cancel new data</button>
-              </div>
+          <div class="actions groupBtn_update">
+            <button id="newBtn">New</button>
+            <button id="updateBtn">Update</button>
+            <button id="deleteBtn">Delete</button>
+          </div>
+          <div class="actions groupBtn_new hidden">
+            <button id="saveBtn">Save new data</button>
+            <button id="cancelBtn">Cancel new data</button>
+          </div>
         </div>
       </div>
       <div class="detailWork">
@@ -54,9 +54,16 @@
           <label for="">Id</label>
           <input type="text" id="id" />
         </div>
-        <div class="item" style="grid-column: span 3">
+        <div class="item" style="grid-column: span 2">
           <label for="">Tiêu đề email</label>
           <input type="text" id="email" />
+        </div>
+        <div class="item">
+          <label for="">Trạng thái</label>
+          <select name="" id="status">
+            <option value="0">Đang xử lý</option>
+            <option value="1">Hoàn thành</option>
+          </select>
         </div>
         <div class="item">
           <label for="">Source</label>
@@ -76,11 +83,19 @@
         </div>
         <div class="item">
           <label for="">Nhân sự phụ trách</label>
-          <input type="text" id="pic" />
+          <select name="" id="pic">
+            <option value="#" selected disabled></option>
+          </select>
         </div>
         <div class="item">
           <label for="">Nhân sự hỗ trợ</label>
-          <input type="text" id="support" />
+          <select name="" id="support">
+            <option value="#"></option>
+          </select>
+        </div>
+        <div class="item hidden">
+          <label for="">Trưởng BP</label>
+          <input type="text" id="hod" />
         </div>
         <div class="item">
           <label for="">Ngày hoàn thành</label>
@@ -122,8 +137,8 @@
         <div class="search"></div>
         <div class="dataTable"></div>
       </div>
-      <div class="modal hidden">Loading...</div>
-      <script src="script.js"></script>
-      
+    </section>
+    <div class="modal hidden">Loading...</div>
+    <script src="script.js"></script>
   </body>
 </html>
