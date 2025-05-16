@@ -132,9 +132,11 @@ var data = [
 var headers = [
   "id",
   "email",
+  "rank",
   "status",
   "source",
   "sap",
+  "store",
   "summarize",
   "pic",
   "support",
@@ -179,7 +181,7 @@ document
   .forEach((input) => {
     input.addEventListener("change", () => {
       isChange = true;
-      console.log(isChange);
+      
     });
   });
 document
@@ -188,7 +190,7 @@ document
   .forEach((input) => {
     input.addEventListener("change", () => {
       isChange = true;
-      console.log(isChange);
+      
     });
   });
 document
@@ -197,7 +199,7 @@ document
   .forEach((input) => {
     input.addEventListener("change", () => {
       isChange = true;
-      console.log(isChange);
+      
     });
   });
 
@@ -214,7 +216,7 @@ async function handleLogin(event) {
     data: { username, password },
   };
 
-  console.log(loginData);
+  
 
   try {
     document.querySelector(".modal").classList.remove("hidden");
@@ -232,9 +234,9 @@ async function handleLogin(event) {
       // Login successful (replace with your desired action)
       alert("Login successful!");
       document.querySelector(".modal").classList.add("hidden");
-      console.log(res.data);
+      
       data = res.data.cases;
-      console.log(data);
+      
       headers = data[1];
       data.splice(0, 2);
       emps = res.data.emps;
@@ -244,7 +246,7 @@ async function handleLogin(event) {
       } else {
         pics = [res.data.user.name];
       }
-      console.log(data, headers, emps, pics);
+      
       document.querySelector(".login").classList.add("hidden");
       document.querySelector(".data").classList.remove("hidden");
 
@@ -308,8 +310,8 @@ function renderTable() {
 
   data.forEach((row) => {
     var dataRow = "";
-    filterIndex.forEach((index) => {
-      dataRow += `<td>${row[index]}</td>`;
+    filterIndex.forEach((index,i) => {
+      dataRow += `<td>${i!==3?row[index]:formatToDDMMYYYY(row[index])}</td>`;
     });
     dataRows = `<tr class="data-row" id = ${row[0]}>${dataRow}</tr>` + dataRows;
   });
@@ -330,11 +332,11 @@ function renderData() {
   var header = table.querySelector(".header");
 
   rows.forEach((row) => row.remove());
-
+  console.log(filterData)
   filterData.forEach((row) => {
     var dataRow = "";
-    filterIndex.forEach((index) => {
-      dataRow += `<td>${row[index]}</td>`;
+    filterIndex.forEach((index,i) => {
+      dataRow += `<td>${i!==3?row[index]:formatToDDMMYYYY(row[index])}</td>`;
     });
 
     var newRow = document.createElement("tr");
@@ -369,15 +371,12 @@ function handleSelectedRow(selectedRow) {
           detail.querySelector("#" + header).value = 1;
         }
       } else if (header === "pic") {
-        console.log(pics.indexOf(rowData[index]));
+        
         detail.querySelector("#" + header).value = pics.indexOf(rowData[index]);
       } else if (header === "support") {
         detail.querySelector("#" + header).value = emps.indexOf(rowData[index]);
       } else if (header === "startDate" || header === "endDate") {
-        console.log(header);
-        detail.querySelector("#" + header).value = convertDateFormat(
-          rowData[index]
-        );
+        detail.querySelector("#" + header).value = rowData[index].slice(0,10);
       } else {
         detail.querySelector("#" + header).value = rowData[index];
       }
@@ -420,7 +419,7 @@ function handleClearSearch() {
 // handle new
 function handleNew() {
   headers.forEach((header) => {
-    console.log(header);
+    
     var el = document.getElementById(header);
     el.value = "";
     if (header === "startDate") {
@@ -442,7 +441,7 @@ function handleNew() {
 // handle cancel
 function handleCancel() {
   headers.forEach((header) => {
-    console.log(header);
+    
     var el = document.getElementById(header);
     el.value = "";
     if (header === "startDate") {
@@ -464,7 +463,7 @@ function handleCancel() {
 async function handleSave() {
   var dataItem = [];
   headers.forEach((header) => {
-    console.log(header);
+    
     var el = document.getElementById(header);
     if (header === "pic") {
       dataItem.push(pics[el.value]);
@@ -485,14 +484,16 @@ async function handleSave() {
     }
   });
 
+  
   // update to dtbase
+
   const submitData = {
     type: "new",
     data: dataItem,
   };
 
   const response = await sendRequest(submitData);
-  console.log(submitData);
+  
   if (response.success) {
     // update to local
     dataItem[0] = response.data;
@@ -514,7 +515,7 @@ function handleUpdate() {
   }
   var dataItem = [];
   headers.forEach((header) => {
-    console.log(header);
+    
     var el = document.getElementById(header);
     if (header === "pic") {
       dataItem.push(pics[el.value]);
@@ -542,9 +543,9 @@ function handleUpdate() {
     type: "update",
     data: dataItem,
   };
-  console.log(submitData);
+  
   const res = sendRequest(submitData);
-  console.log(res);
+  
   // update to local data
   const index = data.map((val) => val[0]).indexOf(dataItem[0]);
   data[index] = dataItem;
@@ -562,7 +563,7 @@ function handleDelete() {
       type: "delete",
       data: id,
     };
-    console.log(submitData);
+    
     sendRequest(submitData);
     // delete in local
     const index = data.map((val) => val[0]).indexOf(id);
@@ -610,28 +611,29 @@ async function sendRequest(submitData) {
 }
 
 function convertDateFormat(dateString) {
-  // Split the date string into day, month, and year components
-  const [day, month, year] = dateString.split("/");
+  const [day, month, year] = dateString.split("/").map(Number);
 
-  // Create a new Date object with the re-arranged components
   const newDate = new Date(year, month - 1, day);
 
-  // Check if the constructed date is valid (avoiding February 29th issues)
+  // Validate date
   if (
-    newDate.getDate() === parseInt(day, 10) &&
-    newDate.getMonth() === month - 1
+    newDate.getDate() !== day ||
+    newDate.getMonth() !== (month - 1)
   ) {
-    // If valid, format the date object in yyyy-mm-dd
-    return newDate.toISOString().slice(0, 10);
-  } else {
-    // If invalid, return null
-    return null;
+    return null; // Invalid date
   }
+
+  // Format manually to avoid timezone problems
+  const yyyy = newDate.getFullYear();
+  const mm = String(newDate.getMonth() + 1).padStart(2, "0");
+  const dd = String(newDate.getDate()).padStart(2, "0");
+
+  return `${yyyy}-${mm}-${dd}`;
 }
 
 function convertToDateString(dateValue) {
   if (dateValue === "") return "";
-  // console.log (typeof dateValue)
+  
   // const val = "2024-12-20"
   //  const year = val.split('-')(0)
   //  const month = val.split('-')(1)
@@ -642,4 +644,14 @@ function convertToDateString(dateValue) {
   const [year, month, day] = dateValue.split("-");
   const formattedDate = `${day}/${month}/${year}`;
   return formattedDate;
+}
+
+function formatToDDMMYYYY(isoString) {
+  const date = new Date(isoString);
+
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0'); // Month is 0-based
+  const year = date.getFullYear();
+
+  return `${day}/${month}/${year}`;
 }
