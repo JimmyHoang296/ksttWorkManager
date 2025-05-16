@@ -35,95 +35,114 @@
       </div>
     </section>
     <section class="data hidden">
-      <div class="empInfor">
-        <h2>Quản lý sự vụ - Hoàng Dương Dũng</h2>
-        <div class="btnGroup">
-          <div class="actions groupBtn_update">
-            <button id="newBtn">New</button>
-            <button id="updateBtn">Update</button>
-            <button id="deleteBtn">Delete</button>
+      <div class="top-section">
+        <div class="empInfor">
+          <h2>Quản lý sự vụ - Hoàng Dương Dũng</h2>
+          <div class="btnGroup">
+            <div class="actions groupBtn_update">
+              <button id="newBtn">New</button>
+              <button id="updateBtn">Update</button>
+              <button id="deleteBtn">Delete</button>
+            </div>
+            <div class="actions groupBtn_new hidden">
+              <button id="saveBtn">Save new data</button>
+              <button id="cancelBtn">Cancel new data</button>
+            </div>
           </div>
-          <div class="actions groupBtn_new hidden">
-            <button id="saveBtn">Save new data</button>
-            <button id="cancelBtn">Cancel new data</button>
+        </div>
+        <div class="detailWork">
+          <div class="item hidden">
+            <label for="">Id</label>
+            <input type="text" id="id" />
           </div>
-        </div>
-      </div>
-      <div class="detailWork">
-        <div class="item hidden">
-          <label for="">Id</label>
-          <input type="text" id="id" />
-        </div>
-        <div class="item" style="grid-column: span 2">
-          <label for="">Tiêu đề email</label>
-          <input type="text" id="email" />
-        </div>
-        <div class="item">
-          <label for="">Trạng thái</label>
-          <select name="" id="status">
-            <option value="0">Đang xử lý</option>
-            <option value="1">Hoàn thành</option>
-          </select>
-        </div>
-        <div class="item">
-          <label for="">Source</label>
-          <input
-            type="text"
-            id="source"
-            placeholder="KSTT, GSKK, ANCS, CSKH,..."
-          />
-        </div>
-        <div class="item">
-          <label for="">Mã SAP - tên cơ sở</label>
-          <input type="text" id="sap" placeholder="VD: 1530-WM Hà Đông" />
-        </div>
-        <div class="item">
-          <label for="">Ngày giao việc</label>
-          <input type="date" id="startDate" />
-        </div>
-        <div class="item">
-          <label for="">Nhân sự phụ trách</label>
-          <select name="" id="pic">
-            <option value="#" selected disabled></option>
-          </select>
-        </div>
-        <div class="item">
-          <label for="">Nhân sự hỗ trợ</label>
-          <select name="" id="support">
-            <option value="#"></option>
-          </select>
-        </div>
-        <div class="item hidden">
-          <label for="">Trưởng BP</label>
-          <input type="text" id="hod" />
-        </div>
-        <div class="item">
-          <label for="">Ngày hoàn thành</label>
-          <input type="date" id="endDate" />
-        </div>
-        <div class="item">
-          <label for="">Nhóm lỗi vi phạm</label>
-          <input type="text" id="group" />
-        </div>
-        <div class="item">
-          <label for="">Giá trị thất thoát</label>
-          <input type="text" id="lossValue" />
-        </div>
-        <div class="item">
-          <label for="">Giá trị thu hồi</label>
-          <input type="text" id="returnValue" />
-        </div>
-        <div class="item" style="grid-column: span 2; grid-row: span 2">
-          <label for="">Tóm tắt vấn đề</label>
-          <textarea name="" id="summarize" cols="30" rows="10"></textarea>
-        </div>
-        <div class="item" style="grid-column: span 2; grid-row: span 2">
-          <label for="">Note và cập nhật</label>
-          <textarea name="" id="note" cols="30" rows="10"></textarea>
-        </div>
-        <div class="item" style="grid-column: span 2; grid-row: span 2">
-          <label for="">Kết luận</label>
-          <textarea name="" id="conclusion" cols="30" rows="10"></textarea>
+          <div class="item" style="grid-column: span 2">
+            <label for="">Tiêu đề email</label>
+            <input type="text" id="email" />
+          </div>
+          <div class="group-item">
+            <div class="item">
+              <label for="">Trạng thái</label>
+              <select name="" id="status">
+                <option value="0">Đang xử lý</option>
+                <option value="1">Hoàn thành</option>
+              </select>
+            </div>
+            <div class="item">
+              <label for="">Phân loại mức độ</label>
+              <select name="" id="rank">
+                <option value="1">⭐</option>
+                <option value="2">⭐⭐</option>
+                <option value="3">⭐⭐⭐</option>
+              </select>
+            </div>
+            
+          </div>
+          <div class="group-item">
+            <div class="item">
+              <label for="">Source</label>
+              <input
+                type="text"
+                id="source"
+                placeholder="KSTT, GSKK, ANCS, CSKH,..."
+              />
+            </div>
+            <div class="item">
+              <label for="">Mã SAP</label>
+              <input type="text" id="sap" placeholder="VD: 1530" />
+            </div>
+          </div>
+          <div class="item">
+            <label for="">Tên cơ sở</label>
+            <input type="text" id="store" placeholder="VD: WM Hà Đông" />
+          </div>
+          <div class="item">
+            <label for="">Ngày giao việc</label>
+            <input type="date" id="startDate" />
+          </div>
+          <div class="item">
+            <label for="">Nhân sự phụ trách</label>
+            <select name="" id="pic">
+              <option value="#" selected disabled></option>
+            </select>
+          </div>
+          <div class="item">
+            <label for="">Nhân sự hỗ trợ</label>
+            <select name="" id="support">
+              <option value="#"></option>
+            </select>
+          </div>
+          <div class="item hidden">
+            <label for="">Trưởng BP</label>
+            <input type="text" id="hod" />
+          </div>
+          <div class="item">
+            <label for="">Ngày hoàn thành</label>
+            <input type="date" id="endDate" />
+          </div>
+          <div class="item">
+            <label for="">Nhóm lỗi vi phạm</label>
+            <input type="text" id="group" />
+          </div>
+          <div class="item">
+            <label for="">Giá trị thất thoát</label>
+            <input type="text" id="lossValue" />
+          </div>
+          <div class="item">
+            <label for="">Giá trị thu hồi</label>
+            <input type="text" id="returnValue" />
+          </div>
+          <div class="item" style="grid-column: span 2; grid-row: span 2">
+            <label for="">Tóm tắt vấn đề</label>
+            <textarea name="" id="summarize" cols="30" rows="10"></textarea>
+          </div>
+          <div class="item" style="grid-column: span 2; grid-row: span 2">
+            <label for="">Note và cập nhật</label>
+            <textarea name="" id="note" cols="30" rows="10"></textarea>
+          </div>
+          <div class="item" style="grid-column: span 2; grid-row: span 2">
+            <label for="">Kết luận</label>
+            <textarea name="" id="conclusion" cols="30" rows="10"></textarea>
+          </div>
         </div>
       </div>
       <div class="list">
